@@ -1,0 +1,188 @@
+\documentclass{article}
+\input{packages}
+\input{formatting}
+\input{title}
+
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\thispagestyle{empty}
+\end{titlepage}
+
+\section*{Git}
+
+\subsection*{Introduction}
+The purpose of this document is to help anyone unfamiliar with Git and GitHub to download, install and configure Git on a Windows system, and how to use Git with GitHub as a distributed version control system. If you are an Electrical Engineering student and you think you won't use Git professionally, then understand there is an extremely high probability you are wrong. Having a familiarity using these tools is extremely advantageous, not to mention expected of you within industry. Many, if not most companies recruiting Electrical Engineering and Computer Engineering graduates will expect graduates to have an intermediate level understanding of at least one programming language (i.e., C/C++, Python, Java) and be familiar with version control systems. Furthermore, utilizing Git and GitHub as a means to keep track of your coursework is not only beneficial for organizational purposes, but it will also help you to learn how to use these foundational tools through application.
+
+\subsection*{Getting Started}
+The first thing you need to do is to determine if you have Git installed, and if not, you will need to download, install, and configure Git on your system. Git is a distributed version control system (VCS) used in the background by GitHub to manage a specified storage location for source code, documentation, and much more. To use GitHub you will need Git.
+
+\subsection*{Verify Git Installation}
+First, determine if Git is currently installed on your system by running the following command using a Windows Command Prompt terminal window:
+\begin{verbatim}
+    git --version
+\end{verbatim}
+If Git is installed, the version will be output to the terminal window with something similar to:
+\begin{verbatim}
+    git version 2.38.0.windows.1
+\end{verbatim}
+If Git is not install, something similar to the following will be output to the terminal window:
+\begin{verbatim}
+    'git' is not recognized as an internal or external command,
+operable program or batch file.
+\end{verbatim}
+
+\subsection*{Download and Install Git}
+You can download Git for Windows using \href{https://git-scm.com/download/win}{this} link. After downloading Git, navigate to your Downloads directory using File Explorer, and double click the installer, then follow the prompts. \textbf{Make sure you select "ADD TO PATH" during the installation!}\\\\
+Upon completion of the installation, close the Command Prompt terminal window if it is still open, and open a Git-Bash terminal window. Verify the installation using the following command:
+\begin{verbatim}
+    git --version
+\end{verbatim}
+
+\subsection*{Configuring Git}
+Prior to using Git you will need to configure the settings for your specific use. Input the following commands replacing anything using the following format $<$user-content$>$ with your user specific information and execute each command: 
+\begin{verbatim}
+    git config --global user.name "<firstName> <lastName>"
+\end{verbatim}
+\begin{verbatim}
+    git config --global user.email <GitHub-Login-Email>
+\end{verbatim}
+\begin{verbatim}
+    git config --global init.defaultBranch main
+\end{verbatim}
+
+\section*{Using Git with GitHub}
+GitHub is a \textbf{free} cloud-based hosting service with a front-end graphical user interface (GUI) for the storage and management of repositories through the use of Git. To setup your GitHub account visit \href{https://github.com/}{this} link and select sign up. Once you have a GitHub account setup and verified, you will be able to utilize code from other repositories via a Fork or Clone of the repository of interest. Prior to using Git with GitHub it is imperative to have a fundamental understanding of some common operations/commands. 
+
+\subsection*{Fork}
+For any public repository, or private repository which you've been given access, you can copy that repository into your GitHub account. For this, you can either Fork or Clone that repository so it will be remotely available to you for access. When you Fork a repository you create an independent copy of the repository in your GitHub account. This is useful when you want to use the code in the repository, but do not intend on contributing back to the original repository. The Fork button is located in the upper-right corner of the GitHub page just beneath and to the left of the user icon.
+
+\subsection*{Clone}
+For repositories you wish to contribute to you can clone the repository which creates a link between your local (on your machine) copy and the remote (on GitHub server) copy. This is useful when collaborating on projects for which you intend to contribute. It is often more useful to create a Fork of a repository to store on your remote account, and then Clone the Forked copy to your local machine.\\\\
+To clone a copy of a repository of interest, select the green Code button on the GitHub GUI, select HTTPS in the dropdown window, and copy the URL displayed for the repository.\\\\
+Open a Git Bash terminal window and input the following to change to your Home directory:
+\begin{verbatim}
+    cd ~
+\end{verbatim}
+Next, input the following to create a folder to store your repositories:
+\begin{verbatim}
+    mkdir repos
+\end{verbatim}
+Next, input the following command to change your current directory to your repos directory you just created:
+\begin{verbatim}
+    cd repos
+\end{verbatim}
+Next, input the following, but do not execute the command yet:
+\begin{verbatim}
+    git clone 
+\end{verbatim}
+Now, paste the repository URL to the command above so it appears similar to the following, and execute the command:
+\begin{verbatim}
+    git clone https://github.com/th1622EE/Physics.git
+\end{verbatim}
+This will create a copy of the repository in your repos directory which will be linked to the repository URL you copied to Clone. As previously mentioned, this is advantageous if you're contributing to the code. However, if you want to make changes to your own copy, and do not intend to push your updates the original repository, it is best to Fork a repository, and then clone the Forked copy from your own GitHub account.
+
+\subsection*{Staging \& Committing Changes}
+Git tracks all changes made to directories and files within a repository unless you explicitly define that Git should ignore them. After making changes to files and/or directories within the repository, and you've reached a point you wish to save the current progress, you must stage and commit these changes. You can view all the untracked changes in the repository using the following command:
+\begin{verbatim}
+    git status
+\end{verbatim}
+You can view all the untracked changes and add specific files (first command) individually and stash the rest, or you can add them all simultaneously (second command) as follows:
+\begin{verbatim}
+    git add <filename.ext>
+\end{verbatim}
+\begin{verbatim}
+    git add --all
+\end{verbatim}
+Once you've added all the untracked files you wish to commit, and/or stashed the rest, you need to commit the changes. Commits are like save points in the repository which Git uses to track and manage the repository. This is very convenient when you would like to revert back to a previous state. Therefore, when you perform a commit, you must also write a descriptive message for reference using the following command:
+\begin{verbatim}
+    git commit -m "Type your descriptive message here"
+\end{verbatim}
+
+\subsection*{Push to Remote}
+Once you have staged and committed your changes, it is good practice to update your remote repository with the new commit(s) currently on your local machine. Because your remote repository is separate from but linked to your local repository; either can be ahead of or behind the other relative to a commit. When your local repository is ahead of your remote repository, you must push the staged and committed changes from your local machine to your remote repository to synchronize them using the following command:
+\begin{verbatim}
+    git push
+\end{verbatim}
+
+\subsection*{Pull from Remote}
+When your local repository is behind your remote repository you can use the following command to update your local repository with the contents of the remote repository:
+\begin{verbatim}
+    git pull
+\end{verbatim}
+It is very important to understand that when you perform the pull operation, the contents of your local (on your computer) repository will be synchronized with the contents of your remote (on GitHub server). This means that any untracked changes on your local machine will be overwritten by the data pulled from the remote from where you are pulling.
+
+\subsection*{Branches}
+It is important to understand your local repository is linked to a remote repository, but it is of critical importance to understand the concept of branches as well. Each branch on your local machine will point (literally using a pointer) to a specific branch on in your remote repository. Branches are used extensively for the development of new features not yet mature enough to be merged into your main branch. Branches enable you to create variants based on another branch by which to experiment, develop, and/or test additional code. \textbf{It is good practice to create a branch separate from main as a working branch, and then merge the contents of your working branch into main when you're certain this is desireable.}\\\\
+You can create a new branch from either the GitHub GUI, or from the command line. However, if your intent is to push updates of a new branch to the remote repository, it will be much easier to to create the new branch from the GitHub GUI. 
+
+\subsubsection*{Creating a Branch from GitHub GUI}
+To create a new branch from the GitHub GUI, navigate to the repository of interest and click the button titled main, and select the "view all branches" link from the drop down menu. Then select the green button titled "New Branch" and input the name of the branch and select the specific branch you want to derive your new branch from. Your new branch will be a copy of whatever branch you select as "branch source" until you make changes. Once you've created this new branch, and you verify your local branch has no untracked changes, you must execute the `git pull` command from the command line so you're local repository will be updated with the new branch.
+
+\subsubsection*{Creating a Branch from Command Line}
+You can create a branch from any existing branch, but whatever branch you want to derive your new branch from need to be your current branch. However, for this example, we will assume that only the main branch exists, it is your current branch, and you are creating a new branch to work in that is a copy of the main branch. To create a new branch from your current branch (main in this example) run the following in a Git Bash terminal window:
+\begin{verbatim}
+    git checkout -b branchName
+\end{verbatim}
+The checkout command is commonly used to change branches. However, when used as above, the `-b` option instructs Git to create a new branch from your current branch, name the branch "branchName", and then switch to the new branch. After executing the above command run the following in your Git Bash terminal window to verify you've created and switched to the new branch:
+\begin{verbatim}
+    git branch
+\end{verbatim}
+To simplify your life and the struggles that will surely follow while learning Git, \textbf{DO NOT} create a branch in this way with the intent to push directly to your remote repository. You should create branches from the command line when the intent is to merge the changes into another branch (i.e., main) and then delete the new branch. 
+
+\subsection*{Deleting Branches}
+To delete a local branch input the following into a Git Bash terminal window:
+\begin{verbatim}
+    git branch -d branchName
+\end{verbatim}
+However, if the branch you would like to delete has unstaged changes you will have to use the following command in a Git Bash terminal:
+\begin{verbatim}
+    git branch -d -f branchName
+\end{verbatim}
+In the above command, the `-d` option is followed by the name of the local branch you would like to commit. To delete a remote branch, you input the following into a Git Bash terminal window:
+\begin{verbatim}
+    git push origin --delete branchName
+\end{verbatim}
+
+\subsection*{Merging Branches}
+To perform a merge of one branch into another branch,  you must first ensure both branches have clean working trees, which implies no untracked changes. A common mistake in Git is unintentionally making changes to the wrong branch. To prevent from doing so it is good practice to check which branch you are currently working in prior to making ANY changes by running the following command:
+\begin{verbatim}
+    git branch
+\end{verbatim}
+The branch with an asterisk * next to the name is the current branch. If you would like to see all branches associated with the local and remote repositories you can run the following command:
+\begin{verbatim}
+    git branch --all
+\end{verbatim}
+Once you have confirmed you are in the working branch, you can run the following to determine if you have a clean working tree (no untracked changes):
+\begin{verbatim}
+    git status
+\end{verbatim}
+If you have pending changes, you must stage and commit the changes. Once you have done so you need to switch to the branch you would like to merge into. You can change from your current branch to your main branch (assuming you want to merge the updates into main) as follows:
+\begin{verbatim}
+    git checkout main
+\end{verbatim}
+Once you have switched to your desired branch (main in this example), run the following command to verify you have a clean working tree:
+\begin{verbatim}
+    git status
+\end{verbatim}
+If this branch has a clean working tree (no untracked changes) you are ready to merge another branch into your current branch. The merge command will merge the data from the branch you input in the command into your current branch. It is imperative to be aware of which branch you are in prior to performing this action. Once you have verified your current branch is the branch you want to update, and you've verified both branches of interest have a clean working tree, you are ready to merge your working branch into main. For this example, we will assume our current branch is main, and the branch you want to merge into main is named "working-branch". You can perform the merge of the feature-branch into main using the following command: 
+\begin{verbatim}
+    git merge working-branch
+\end{verbatim}
+\subsection{Fetch \& Merge Updates}
+The fetch command will pull only the data from the remote (on GitHub server) repository to your local machine without overwriting your local repository. After fetching the changes existing in your remote (on GitHub server) repository which do not exist on your local machine, you can perform a merge of those changes into your local repository using the following commands in order:
+\begin{verbatim}
+    git fetch
+\end{verbatim}
+\begin{verbatim}
+    git merge
+\end{verbatim}
+
+\subsection*{Additional Resources}
+I strongly suggest visiting \href{https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control}{this} link for an in-depth and more explanatory resource for getting started with Git. Within this online manual there are explanations of every git command, for every version of Git, with examples to aid in understanding how the commands and the software works, as well as examples of how to execute these commands.\\\\
+The complementary Pro Git Book in PDF format is also freely available for download from the git-scm website, or you can click \href{https://github.com/progit/progit2/releases/download/2.1.360/progit.pdf}{this} link to initiate the download.\\\\
+An alternative to GitHub commonly used in industry is Atlassian Bitbucket which also utilizes Git as a version control system (VCS). Atlassian provides outstanding examples of how to use git commands, and I have personally found their tutorials to be of great use, often being more concise and easier to understand when learning how to utilize commands for which I am unfamiliar.\\\\
+Lastly, I recommend the W3Schools Git Tutorial available at \href{https://www.w3schools.com/git/}{this} link. This is a good resource for an absolute beginner. Working through the tutorials will provide the user with a basic understanding of how and when commands are used in practice. 
+
+\end{document}
